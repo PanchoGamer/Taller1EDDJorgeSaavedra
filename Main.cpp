@@ -27,10 +27,27 @@ int main() {
         switch(opcion){
             case 1:
                 cout << "Opcion1" << endl;
+                break;
             case 2:
                 cout << "Opcion2" << endl;
+                break;
+            case 3:
+                cout << "Option3" << endl;
+                break;
+            case 4:
+                cout << "Option4" << endl;
+                break;
+            case 5:
+                cout << "Option5" << endl;
+                break;
         };
         
 
     } while (opcion != 6);
+
+    cout << "Hasta Luego :D" << endl;
+}
+
+int cargarTxt(){
+    
 }
