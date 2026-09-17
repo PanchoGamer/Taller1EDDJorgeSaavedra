@@ -2,6 +2,8 @@
 #include <stdexcept>
 #include <fstream>
 #include <string>
+#include <sstream>
+#include "Persona.h"
 using namespace std;
 
 void cargarTxt(bool* archivoLeido){
@@ -17,7 +19,16 @@ void cargarTxt(bool* archivoLeido){
         string linea;
 
         while (getline(archivo,linea)){
-            cout << linea << endl;
+            stringstream ss(linea);
+
+            int id;
+            string nombre;
+            int edad;
+            string servicio;
+
+            sscanf(linea.c_str(), "%d;%[^,];%d;$[^,]",id,nombre,edad,servicio);
+
+            cout << id << "|" << nombre << "|" << edad << "|" << servicio;
         }
 
         archivo.close();
