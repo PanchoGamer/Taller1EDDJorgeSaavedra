@@ -1,8 +1,37 @@
 #include <iostream>
 #include <stdexcept>
+#include <fstream>
+#include <string>
 using namespace std;
 
+void cargarTxt(bool* archivoLeido){
+    if (*archivoLeido == false){
+        *archivoLeido = true;
+
+        ifstream archivo("Pacientes.txt");
+
+        if(!archivo.is_open()) {
+            cout << "El archivo no existe" << endl;
+        }
+
+        string linea;
+
+        while (getline(archivo,linea)){
+            cout << linea << endl;
+        }
+
+        archivo.close();
+
+        cout << "Archivo Leido" << endl;
+    }
+    else{
+        cout << "El archivo ya se ha leido" << endl;
+    };
+}
+
 int main() {
+    bool* archivoLeido;
+    *archivoLeido = false;
     cout << "------------------- Menu Principal -------------------" << endl;
     int opcion;
     do{
@@ -26,7 +55,7 @@ int main() {
 
         switch(opcion){
             case 1:
-                cout << "Opcion1" << endl;
+                cargarTxt(archivoLeido);
                 break;
             case 2:
                 cout << "Opcion2" << endl;
@@ -46,8 +75,4 @@ int main() {
     } while (opcion != 6);
 
     cout << "Hasta Luego :D" << endl;
-}
-
-int cargarTxt(){
-    
 }
