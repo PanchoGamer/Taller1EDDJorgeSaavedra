@@ -6,29 +6,34 @@
 #include "Persona.h"
 using namespace std;
 
-void cargarTxt(bool* archivoLeido){
-    if (*archivoLeido == false){
-        *archivoLeido = true;
+void cargarTxt(bool &archivoLeido){
+    if (archivoLeido == false){
+        archivoLeido = true;
 
         ifstream archivo("Pacientes.txt");
 
         if(!archivo.is_open()) {
+            archivoLeido = false;
             cout << "El archivo no existe" << endl;
         }
 
         string linea;
-
+        
         while (getline(archivo,linea)){
             stringstream ss(linea);
+            string idTexto, nombre, edadTexto, servicio;
 
-            int id;
-            string nombre;
-            int edad;
-            string servicio;
+            getline(ss, idTexto, ';');
+            getline(ss, nombre, ';');
+            getline(ss, edadTexto, ';');
+            getline(ss, servicio, ';');
 
-            sscanf(linea.c_str(), "%d;%[^,];%d;$[^,]",id,nombre,edad,servicio);
+            int id = stoi(idTexto);
+            int edad = stoi(edadTexto);
 
-            cout << id << "|" << nombre << "|" << edad << "|" << servicio;
+            Persona* p = new Persona(id,nombre,edad,servicio);
+            
+            cout << "Nombre: " << p->getNombre() << " / Edad: " << p->getEdad() << " / Servicio:  " << p->getServicio() << endl;
         }
 
         archivo.close();
@@ -36,13 +41,12 @@ void cargarTxt(bool* archivoLeido){
         cout << "Archivo Leido" << endl;
     }
     else{
-        cout << "El archivo ya se ha leido" << endl;
+        cout << "El archivo ya se ha leido" << "\n" << endl;
     };
 }
 
 int main() {
-    bool* archivoLeido;
-    *archivoLeido = false;
+    bool archivoLeido = false;
     cout << "------------------- Menu Principal -------------------" << endl;
     int opcion;
     do{

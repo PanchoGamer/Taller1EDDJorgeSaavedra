@@ -4,11 +4,15 @@ using namespace std;
 
 class Persona{
     private:
-        int ID;
+        int id;
         string nombre;
         int edad;
         string servicio;
     public:
-        Persona(int ID, string nombre,int edad, string servicio);
+        Persona(int id, string nombre,int edad, string servicio);
+        int getId();
+        string getNombre();
+        int getEdad();
+        string getServicio();
         ~Persona();
 };
