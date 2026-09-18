@@ -1,9 +1,8 @@
 #include <iostream>
 #include "Persona.h"
 #include <string>
-using namespace std;
 
-Persona::Persona(int ID, string nombre,int edad, string servicio){
+Persona::Persona(int ID, std::string nombre,int edad, std::string servicio){
     this->id = ID;
     this->nombre = nombre;
     this->edad = edad;
@@ -14,7 +13,7 @@ int Persona::getId(){
     return id;
 }
 
-string Persona::getNombre(){
+std::string Persona::getNombre(){
     return nombre;
 }
 
@@ -22,6 +21,6 @@ int Persona::getEdad(){
     return edad;
 }
 
-string Persona::getServicio(){
+std::string Persona::getServicio(){
     return servicio;
 }

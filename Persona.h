@@ -1,18 +1,17 @@
 #pragma once
 #include <string>
-using namespace std;
 
 class Persona{
     private:
         int id;
-        string nombre;
+        std::string nombre;
         int edad;
-        string servicio;
+        std::string servicio;
     public:
-        Persona(int id, string nombre,int edad, string servicio);
+        Persona(int id, std::string nombre,int edad, std::string servicio);
         int getId();
-        string getNombre();
+        std::string getNombre();
         int getEdad();
-        string getServicio();
+        std::string getServicio();
         ~Persona();
 };

@@ -1,17 +1,23 @@
 #pragma once
-#include <Node.h>
+#include "Node.h"
 
+template <class T>
 class List {
     private:
-        Node* start;
+        Node<T>* start;
     public:
         List();
 
-        void insert(int value, int index);
-        void insertFirst(int value);
-        void insertLast(int value);
+        void insert(T value, int index);
+        void insertFirst(T value);
+        void insertLast(T value);
 
-        int get(int index);
-        int getFirst();
-        int getLast();
+        T get(int index);
+        T getFirst();
+        T getLast();
+
+        void remove(int index);
+        void clear();
+
+        ~List();
 };
