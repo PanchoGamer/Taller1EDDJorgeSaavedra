@@ -14,7 +14,7 @@ bool Queue<T>::empty(){
 template <class T>
 void Queue<T>::push(T value){
     if(this->start==nullptr){
-        start = new Node<T>*(value);
+        start = new Node<T>(value);
         return;
     }
 

@@ -10,7 +10,7 @@ template <class T>
 void List<T>::insert(T value, int index){
     if (index < 0) throw 0;
     if (index == 0){
-        this->insertFirst(new Node<T>*(value)); return;
+        this->insertFirst(value); return;
     }
 
     Node<T>* cursor = this->start;
@@ -35,7 +35,7 @@ template <class T>
 void List<T>::insertLast(T value){
     if (this->start == nullptr){
         this->start = new Node<T>(value);
-        return
+        return;
     }
 
     Node<T>* cursor = this->start;
@@ -77,7 +77,7 @@ T List<T>::getLast(){
 template <class T>
 int List<T>::getSize(){
     int c = 0;
-    Node<T> actual = this->start;
+    Node<T>* actual = this->start;
     while(actual!=nullptr){
         c++;
         actual = actual->getNext();
@@ -89,7 +89,7 @@ template <class T>
 void List<T>::remove(int index){
     if (!this->start || index < 0) throw 0;
     if (index == 0) {
-        Node<T>* toDel = this->start
+        Node<T>* toDel = this->start;
         this->start = toDel->getNext();
         delete toDel; return;
     }
@@ -121,7 +121,7 @@ List<T>::~List(){
     Node<T>* actual = this->start;
     while(actual!=nullptr){
         Node<T>* temp = actual;
-        actual = actual->getNext;
+        actual = actual->getNext();
         delete temp;
     }
 }

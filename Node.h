@@ -6,9 +6,7 @@ class Node{
         T value;
         Node* next;
     public:
-        Node (T value){
-            this->value = value;
-            this->next = nullptr;
+        Node(T value) : value(value), next(nullptr) {
         }
 
         T getValue(){
@@ -26,5 +24,5 @@ class Node{
             this->next = next;
         }
 
-        ~Node();
+        ~Node(){}
 };

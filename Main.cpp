@@ -9,7 +9,7 @@
 #include "Servicio.h"
 using namespace std;
 
-void cargarTxt(bool &archivoLeido){
+void cargarTxt(bool &archivoLeido,List<Persona>* lista){
     if (archivoLeido == false){
         archivoLeido = true;
 
@@ -21,6 +21,7 @@ void cargarTxt(bool &archivoLeido){
         }
 
         string linea;
+        int c = 0;
         
         while (getline(archivo,linea)){
             stringstream ss(linea);
@@ -35,9 +36,13 @@ void cargarTxt(bool &archivoLeido){
             int edad = stoi(edadTexto);
 
             Persona* p = new Persona(id,nombre,edad,servicio);
-            
-            cout << "Nombre: " << p->getNombre() << " / Edad: " << p->getEdad() << " / Servicio:  " << p->getServicio() << endl;
+            lista->insert(*p,c);
+            c++;
         }
+        
+        for(int i = 0; i < lista->getSize()-1; i++){
+            cout << "ID: " << lista->get(i).getId() << "\nNombre: " << lista->get(i).getNombre() << "\nEdad: " << lista->get(i).getEdad() << "\nServicio: " << lista->get(i).getServicio() << endl;
+        };
 
         archivo.close();
 
@@ -52,7 +57,7 @@ int main() {
     bool archivoLeido = false;
     cout << "------------------- Menu Principal -------------------" << endl;
     int opcion;
-    List<Persona> lista;
+    List<Persona>* lista = new List<Persona>();
     do{
         cout << "1. Cargar Pacientes." << endl;
         cout << "2. Mostrar cola de pacientes pendientes" << endl;
@@ -74,7 +79,7 @@ int main() {
 
         switch(opcion){
             case 1:
-                cargarTxt(archivoLeido);
+                cargarTxt(archivoLeido, lista);
                 break;
             case 2:
                 cout << "Opcion2" << endl;
