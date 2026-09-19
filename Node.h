@@ -6,13 +6,25 @@ class Node{
         T value;
         Node* next;
     public:
-        Node (T value);
+        Node (T value){
+            this->value = value;
+            this->next = nullptr;
+        }
 
-        T getValue();
-        Node<T>* getNext();
+        T getValue(){
+            return this->value;
+        }
 
-        void setValue(T value);
-        void setNext(Node<T>* next);
+        Node<T>* getNext(){
+            return this->next;
+        }
+
+        void setValue(T value){
+            this->value = value;
+        }
+        void setNext(Node<T>* next){
+            this->next = next;
+        }
 
         ~Node();
 };

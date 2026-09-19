@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Persona.h"
 #include <string>
 
@@ -24,3 +23,5 @@ int Persona::getEdad(){
 std::string Persona::getServicio(){
     return servicio;
 }
+
+Persona::~Persona(){}

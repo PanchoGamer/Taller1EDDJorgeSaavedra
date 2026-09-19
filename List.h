@@ -15,9 +15,12 @@ class List {
         T get(int index);
         T getFirst();
         T getLast();
+        int getSize();
 
         void remove(int index);
         void clear();
 
         ~List();
 };
+
+#include "List.cpp"

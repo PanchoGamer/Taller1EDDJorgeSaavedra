@@ -1,10 +1,12 @@
 #include <iostream>
 #include <stdexcept>
 #include <fstream>
-#include <string>
 #include <sstream>
 #include "Persona.h"
-#include "List.cpp"
+#include "List.h"
+#include "Node.h"
+#include "Queue.h"
+#include "Servicio.h"
 using namespace std;
 
 void cargarTxt(bool &archivoLeido){
@@ -50,7 +52,7 @@ int main() {
     bool archivoLeido = false;
     cout << "------------------- Menu Principal -------------------" << endl;
     int opcion;
-    List<Persona>* lista = new List<Persona>;
+    List<Persona> lista;
     do{
         cout << "1. Cargar Pacientes." << endl;
         cout << "2. Mostrar cola de pacientes pendientes" << endl;

@@ -15,3 +15,4 @@ class Persona{
         std::string getServicio();
         ~Persona();
 };
+#include "Persona.cpp"
