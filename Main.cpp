@@ -61,13 +61,8 @@ void cargarTxt(bool &archivoLeido,List<Persona>* lista,List<Servicio>* listaServ
         
         cout << listaServicio->getSize() << endl;
         
-        //for(int i = 0; i < lista->getSize()-1; i++){
-            //cout << "ID: " << lista->get(i).getId() << "\nNombre: " << lista->get(i).getNombre() << "\nEdad: " << lista->get(i).getEdad() << "\nServicio: " << lista->get(i).getServicio() << endl;
-        //};
-
         archivo.close();
 
-        ///cout << "Archivo Leido" << endl;
     }
     else{
         cout << "El archivo ya se ha leido" << "\n" << endl;
@@ -150,7 +145,6 @@ void mostrarHistorial(List<Persona>* atendidos){
 }
 
 int main() {
-    try{
     bool archivoLeido = false;
     int opcion;
     List<Persona>* lista = new List<Persona>();
@@ -204,9 +198,4 @@ int main() {
     delete atendidos;
 
     cout << "Hasta Luego :D" << endl;
-    } catch (int e) {
-        cout << "Error capturado (codigo " << e << ")" << endl;
-    } catch (exception& e){
-        cout << "Error: " << e.what() << endl;
-    }
 }
