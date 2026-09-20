@@ -20,6 +20,8 @@ class List {
         void remove(int index);
         void clear();
 
+        T& getRef(int index);
+
         ~List();
 };
 

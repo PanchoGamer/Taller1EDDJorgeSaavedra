@@ -23,6 +23,10 @@ class Node{
         void setNext(Node<T>* next){
             this->next = next;
         }
+        
+        T& getValueRef(){
+            return this->value;
+        }
 
         ~Node(){}
 };

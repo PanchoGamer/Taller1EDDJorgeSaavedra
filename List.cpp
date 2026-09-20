@@ -125,3 +125,14 @@ List<T>::~List(){
         delete temp;
     }
 }
+
+template <class T>
+T& List<T>::getRef(int index){
+    if (!this->start || index < 0) throw 0;
+    Node<T>* cursor = this->start;
+    for (int i = 0; i < index; i++) {
+        cursor = cursor->getNext();
+        if (!cursor) throw 0;
+    }
+    return cursor->getValueRef();
+}

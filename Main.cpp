@@ -74,16 +74,36 @@ void cargarTxt(bool &archivoLeido,List<Persona>* lista,List<Servicio>* listaServ
     };
 }
 
-void atenderPacientes(List<Persona>* lista){
+void atenderPacientes(List<Persona>* lista, List<Servicio>* listaServicio){
     int eleccion;
     cout << "=== PACIENTES EN ESPERA ===" << endl;
-    for(int i = 0 ; i < lista->getSize() - 1; i++){
+    for(int i = 0 ; i < lista->getSize(); i++){
         cout << i+1 << ". " << lista->get(i).getId() << " - " << lista->get(i).getNombre() << endl;
     };
     cout << "\nIndique cuantos pacientes va a atender: ";
     cin >> eleccion;
 
+    for(int i = 0; i < eleccion; i++){
+        Persona p = lista->get(i);
+        for(int j = 0; j < listaServicio->getSize(); j++){
+            if (listaServicio->getRef(j).getNombre() == p.getServicio()){
+                listaServicio->getRef(j).agregarPaciente(p);
+                break;
+            }
+        }
+    }
+}
 
+void verDepartamentos(List<Servicio>* listaServico){
+    int eleccion;
+    cout << endl;
+    cout << "=== DEPARTAMENTOS/SERVICIOS ===" << endl;
+    for(int i = 0; i < listaServico->getSize(); i++){
+        cout << i+1 << ". " << listaServico->get(i).getNombre() << endl;
+    };
+    cout << "\nSeleccione Opcion: ";
+    cin >> eleccion;
+    cout << "" << endl;
 }
 int main() {
     try{
@@ -92,6 +112,12 @@ int main() {
     List<Persona>* lista = new List<Persona>();
     List<Servicio>* listaServicio = new List<Servicio>();
     cargarTxt(archivoLeido, lista, listaServicio);
+    int totalServicios = listaServicio->getSize();
+    Servicio** indice = new Servicio*[totalServicios];
+
+    for(int i = 0; i < totalServicios; i++){
+        *(indice + i) = &listaServicio->getRef(i);
+    }
     do{
         opcion = 0;
         cout << "=== HOSPITAL ===" << endl;
@@ -114,10 +140,10 @@ int main() {
 
         switch(opcion){
             case 1:
-                atenderPacientes(lista);
+                atenderPacientes(lista, listaServicio);
                 break;
             case 2:
-                cout << "Opcion2" << endl;
+                verDepartamentos(listaServicio);
                 break;
             case 3:
                 cout << "Option3" << endl;
@@ -126,6 +152,10 @@ int main() {
         
 
     } while (opcion != 4);
+
+    delete[] indice;
+    delete lista;
+    delete listaServicio;
 
     cout << "Hasta Luego :D" << endl;
     } catch (int e) {
