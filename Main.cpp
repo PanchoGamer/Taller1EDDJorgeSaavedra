@@ -51,7 +51,6 @@ void cargarTxt(bool &archivoLeido,List<Persona>* lista,List<Servicio>* listaServ
                 }
             };
 
-
             if(!encontrado){
                 Servicio* servicio = new Servicio(p.getServicio());
                 listaServicio->insert(*servicio, listaServicio->getSize());
@@ -145,11 +144,11 @@ void verDepartamentos(Servicio** indice, int total){
     cout << "=== ESTADO " << elegido->getNombre() << " ===" << endl;
     cout << "Pacientes en el departamento: " << elegido->cantidadPacientes() << endl;
 
-    Node<Persona>* cursor = elegido->getPacientes().getStart();
-    while(cursor != nullptr){
-        cout << cursor->getValue().getNombre() << "(" << cursor->getValue().getEdad() << ")" << endl;
-        cursor = cursor->getNext();
-    }
+    Queue<Persona>& colaPacientes = elegido->getPacientes();
+    for(int i = 0; i < colaPacientes.size(); i++){
+        Persona& p = colaPacientes.consultar(i);
+        cout << p.getNombre() << " (" << p.getEdad() << ")" << endl;
+    };
     cout << "" << endl;   
 }
 

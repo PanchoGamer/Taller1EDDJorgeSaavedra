@@ -4,7 +4,7 @@
 #include "Persona.h"
 
 class Servicio{
-    private:
+    private:    
         std::string nombre;
         Queue<Persona> pacientes;
     public:

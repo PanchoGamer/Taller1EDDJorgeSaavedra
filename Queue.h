@@ -1,21 +1,40 @@
 #pragma once
-#include "Node.h"
+#include "List.h"
 
 template <class T>
-class Queue {
+class Queue : private List<T> {
     private:
         Node<T>* start;
     public:
-        Queue();
+        Queue() : List<T>() {};
 
-        bool empty();
-        void push(T value);
-        void pop();
-        T front();
-        Node<T>* getStart();
-        void clear();
-        int size();
+        bool empty(){
+            return this->getSize() == 0;
+        }
 
-        ~Queue();
+        void push(T value){
+            this->insertLast(value);
+        }
+
+        void pop(){
+            this->remove(0);
+        }
+
+        T front(){
+            return this->getFirst();
+        }
+        
+        void clear(){
+            List<T>::clear();
+        }
+
+        int size(){
+            return this->getSize();
+        }
+
+        T& consultar(int index) {
+            return this->getRef(index);
+        }
+
+        ~Queue() {}
 };
-#include "Queue.cpp"
