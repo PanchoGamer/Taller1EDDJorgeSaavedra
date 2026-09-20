@@ -74,7 +74,7 @@ void cargarTxt(bool &archivoLeido,List<Persona>* lista,List<Servicio>* listaServ
     };
 }
 
-void atenderPacientes(List<Persona>* lista, List<Servicio>* listaServicio){
+void atenderPacientes(List<Persona>* lista, List<Servicio>* listaServicio, List<Persona>* atendidos){
     int eleccion;
     if(lista->getSize() == 0){
         cout << "No quedan pacientes en espera\n" << endl;
@@ -91,6 +91,8 @@ void atenderPacientes(List<Persona>* lista, List<Servicio>* listaServicio){
     cout << "\n=== ATENDIENDO PACIENTES ===" << endl;
     for(int i = 0; i < eleccion; i++){
         Persona p = lista->get(0);
+        int sizeAtendidos = atendidos->getSize();
+        atendidos->insert(p, sizeAtendidos);
         for(int j = 0; j < listaServicio->getSize(); j++){
             if (listaServicio->getRef(j).getNombre() == p.getServicio()){
                 listaServicio->getRef(j).agregarPaciente(p);
@@ -133,12 +135,26 @@ void verDepartamentos(Servicio** indice, int total){
     cout << "" << endl;   
 }
 
+void mostrarHistorial(List<Persona>* atendidos){
+    cout << "=== HISTORIAL DE ÚLTIMAS ATENCIONES DEL HOSPITAL ===\n" << endl;
+    if(atendidos->getSize() == 0){
+        cout << "No se ha atendido ningun paciente todavia\n" << endl;
+    }
+    
+    for (int i = 0; i < atendidos->getSize(); i++){
+        Persona p = atendidos->get(i);
+        cout << "Nombre: " << p.getNombre() << " | Edad: " << p.getEdad() << " | Departamento: " << p.getServicio() << endl;
+    }
+    cout << "" << endl;
+}
+
 int main() {
     try{
     bool archivoLeido = false;
     int opcion;
     List<Persona>* lista = new List<Persona>();
     List<Servicio>* listaServicio = new List<Servicio>();
+    List<Persona>* atendidos = new List<Persona>();
     cargarTxt(archivoLeido, lista, listaServicio);
     int totalServicios = listaServicio->getSize();
     Servicio** indice = new Servicio*[totalServicios];
@@ -168,13 +184,13 @@ int main() {
 
         switch(opcion){
             case 1:
-                atenderPacientes(lista, listaServicio);
+                atenderPacientes(lista, listaServicio, atendidos);
                 break;
             case 2:
                 verDepartamentos(indice, totalServicios);
                 break;
             case 3:
-                cout << "Option3" << endl;
+                mostrarHistorial(atendidos);
                 break;
         };
         
@@ -184,6 +200,7 @@ int main() {
     delete[] indice;
     delete lista;
     delete listaServicio;
+    delete atendidos;
 
     cout << "Hasta Luego :D" << endl;
     } catch (int e) {
