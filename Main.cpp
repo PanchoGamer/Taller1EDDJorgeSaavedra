@@ -136,9 +136,10 @@ void verDepartamentos(Servicio** indice, int total){
 }
 
 void mostrarHistorial(List<Persona>* atendidos){
-    cout << "=== HISTORIAL DE ÚLTIMAS ATENCIONES DEL HOSPITAL ===\n" << endl;
+    cout << "=== HISTORIAL DE ULTIMAS ATENCIONES DEL HOSPITAL ===\n" << endl;
     if(atendidos->getSize() == 0){
         cout << "No se ha atendido ningun paciente todavia\n" << endl;
+        return;
     }
     
     for (int i = 0; i < atendidos->getSize(); i++){
