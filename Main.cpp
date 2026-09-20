@@ -69,6 +69,16 @@ void cargarTxt(bool &archivoLeido,List<Persona>* lista,List<Servicio>* listaServ
     };
 }
 
+bool verificarCin(int& valor){
+    cin >> valor;   
+    if(cin.fail()){
+        cin.clear();
+        cin.ignore(1000, '\n');
+        return false;
+    }
+    return true;
+}
+
 void atenderPacientes(List<Persona>* lista, List<Servicio>* listaServicio, List<Persona>* atendidos){
     int eleccion;
     if(lista->getSize() == 0){
@@ -81,7 +91,15 @@ void atenderPacientes(List<Persona>* lista, List<Servicio>* listaServicio, List<
         cout << i+1 << ". " << lista->get(i).getId() << " - " << lista->get(i).getNombre() << endl;
     };
     cout << "\nIndique cuantos pacientes va a atender: ";
-    cin >> eleccion;
+    
+    if(!verificarCin(eleccion)){
+        cout << "Error, Use solo numeros\n" << endl;
+        return;
+    }
+    if(eleccion > lista->getSize()){
+        cout << "Error, elija solo hasta el numero maximo mostrado" << endl;
+        return;
+    }
 
     cout << "\n=== ATENDIENDO PACIENTES ===" << endl;
     for(int i = 0; i < eleccion; i++){
@@ -113,7 +131,12 @@ void verDepartamentos(Servicio** indice, int total){
     };
 
     cout << "\nSeleccione Opcion: ";
-    cin >> eleccion;
+    
+    if(!verificarCin(eleccion)){
+        cout << "Error. Use solo numeros\n" << endl;
+        return;
+    }
+
     if (eleccion < 1 || eleccion > total){
         cout << "Error. Elija entre los departamentos\n" << endl;
         return;
@@ -166,12 +189,12 @@ int main() {
         cout << "4. Salir" << endl;
         cout << "" << endl;
         cout << "Eliga la opcion: ";
-        cin >> opcion;
-        cout << "" << endl;
-
-        if (cin.fail()){
-            throw invalid_argument("Error. Use solo numeros");
+        
+        if(!verificarCin(opcion)){
+            cout << "Error. Use solo numeros\n" << endl;
+            continue;
         }
+        cout << "" << endl;
 
         if (opcion < 1 || opcion > 4){
             throw invalid_argument("Eliga una opcion valida");
