@@ -6,5 +6,5 @@
 
 ## Instrucciones de compilacion y ejecucion
 - Abrir un codespace (boton code y en codespace en el repositorio)
-- Escribir el siguiente comando para compilar el codigo en la terminar "g++ Main.cpp Persona.cpp Servicio.cpp -o Taller1". Esto creara el ejecutable de programa
-- Luego escribir el comando para ejecutar el programa "./Taller1". Con esto el codigo ejecutara en la terminar del codespace.
+- Escribir el siguiente comando para compilar el codigo en la terminal "g++ Main.cpp Persona.cpp Servicio.cpp -o Taller1". Esto creara el ejecutable de programa
+- Luego escribir el comando para ejecutar el programa "./Taller1". Con esto el codigo ejecutara en la terminal del codespace.
