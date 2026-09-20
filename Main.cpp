@@ -76,6 +76,11 @@ void cargarTxt(bool &archivoLeido,List<Persona>* lista,List<Servicio>* listaServ
 
 void atenderPacientes(List<Persona>* lista, List<Servicio>* listaServicio){
     int eleccion;
+    if(lista->getSize() == 0){
+        cout << "No quedan pacientes en espera\n" << endl;
+        return;
+    }
+
     cout << "=== PACIENTES EN ESPERA ===" << endl;
     for(int i = 0 ; i < lista->getSize(); i++){
         cout << i+1 << ". " << lista->get(i).getId() << " - " << lista->get(i).getNombre() << endl;
@@ -85,7 +90,7 @@ void atenderPacientes(List<Persona>* lista, List<Servicio>* listaServicio){
 
     cout << "\n=== ATENDIENDO PACIENTES ===" << endl;
     for(int i = 0; i < eleccion; i++){
-        Persona p = lista->get(i);
+        Persona p = lista->get(0);
         for(int j = 0; j < listaServicio->getSize(); j++){
             if (listaServicio->getRef(j).getNombre() == p.getServicio()){
                 listaServicio->getRef(j).agregarPaciente(p);
@@ -97,6 +102,7 @@ void atenderPacientes(List<Persona>* lista, List<Servicio>* listaServicio){
                 break;
             }
         }
+        lista->remove(0);
     }
 }
 
