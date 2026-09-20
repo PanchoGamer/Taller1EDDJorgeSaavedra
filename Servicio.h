@@ -11,6 +11,7 @@ class Servicio{
         Servicio(std::string nombre);
 
         std::string getNombre();
+        Queue<Persona>& getPacientes();
         void agregarPaciente(Persona p);
         Persona atenderPaciente();
         bool pendientes();

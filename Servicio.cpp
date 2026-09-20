@@ -8,6 +8,10 @@ std::string Servicio::getNombre(){
     return this->nombre;
 }
 
+Queue<Persona>& Servicio::getPacientes(){
+    return pacientes;
+}
+
 void Servicio::agregarPaciente(Persona p){
     pacientes.push(p);
 }

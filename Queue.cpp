@@ -41,6 +41,11 @@ T Queue<T>::front(){
 }
 
 template <class T>
+Node<T>* Queue<T>::getStart(){
+    return this->start;
+}
+
+template <class T>
 void Queue<T>::clear(){
     while (this->start != nullptr){
         Node<T>* temp = this->start->getNext();

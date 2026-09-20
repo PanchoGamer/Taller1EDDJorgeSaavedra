@@ -83,11 +83,17 @@ void atenderPacientes(List<Persona>* lista, List<Servicio>* listaServicio){
     cout << "\nIndique cuantos pacientes va a atender: ";
     cin >> eleccion;
 
+    cout << "\n=== ATENDIENDO PACIENTES ===" << endl;
     for(int i = 0; i < eleccion; i++){
         Persona p = lista->get(i);
         for(int j = 0; j < listaServicio->getSize(); j++){
             if (listaServicio->getRef(j).getNombre() == p.getServicio()){
                 listaServicio->getRef(j).agregarPaciente(p);
+                cout << "ID: " << p.getId() << endl;
+                cout << "Nombre: " << p.getNombre() << endl;
+                cout << "Edad: " << p.getEdad() << endl;
+                cout << "Servicio: " << p.getServicio() << endl;
+                cout << "\nPaciente enviado a " << p.getServicio() << "\n" << endl;
                 break;
             }
         }
@@ -105,14 +111,22 @@ void verDepartamentos(Servicio** indice, int total){
 
     cout << "\nSeleccione Opcion: ";
     cin >> eleccion;
-    if (eleccion < 1 || eleccion > 8){
-        cout << "Error. Elija entre los departamentos" << endl;
+    if (eleccion < 1 || eleccion > total){
+        cout << "Error. Elija entre los departamentos\n" << endl;
         return;
     }
     Servicio* elegido = *(indice + (eleccion - 1)); 
     cout << "=== ESTADO " << elegido->getNombre() << " ===" << endl;
     cout << "Pacientes en el departamento: " << elegido->cantidadPacientes() << endl;
+
+    Node<Persona>* cursor = elegido->getPacientes().getStart();
+    while(cursor != nullptr){
+        cout << cursor->getValue().getNombre() << "(" << cursor->getValue().getEdad() << ")" << endl;
+        cursor = cursor->getNext();
+    }
+    cout << "" << endl;   
 }
+
 int main() {
     try{
     bool archivoLeido = false;

@@ -12,6 +12,7 @@ class Queue {
         void push(T value);
         void pop();
         T front();
+        Node<T>* getStart();
         void clear();
         int size();
 
