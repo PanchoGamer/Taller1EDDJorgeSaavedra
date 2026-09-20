@@ -55,10 +55,7 @@ void cargarTxt(bool &archivoLeido,List<Persona>* lista,List<Servicio>* listaServ
                 Servicio* servicio = new Servicio(p.getServicio());
                 listaServicio->insert(*servicio, listaServicio->getSize());
             }
-
         };
-        
-        cout << listaServicio->getSize() << endl;
         
         archivo.close();
 
