@@ -94,16 +94,24 @@ void atenderPacientes(List<Persona>* lista, List<Servicio>* listaServicio){
     }
 }
 
-void verDepartamentos(List<Servicio>* listaServico){
+void verDepartamentos(Servicio** indice, int total){
     int eleccion;
     cout << endl;
     cout << "=== DEPARTAMENTOS/SERVICIOS ===" << endl;
-    for(int i = 0; i < listaServico->getSize(); i++){
-        cout << i+1 << ". " << listaServico->get(i).getNombre() << endl;
+    for(int i = 0; i < total; i++){
+        Servicio* s = *(indice + i);
+        cout << i+1 << ". " << s->getNombre() << endl;
     };
+
     cout << "\nSeleccione Opcion: ";
     cin >> eleccion;
-    cout << "" << endl;
+    if (eleccion < 1 || eleccion > 8){
+        cout << "Error. Elija entre los departamentos" << endl;
+        return;
+    }
+    Servicio* elegido = *(indice + (eleccion - 1)); 
+    cout << "=== ESTADO " << elegido->getNombre() << " ===" << endl;
+    cout << "Pacientes en el departamento: " << elegido->cantidadPacientes() << endl;
 }
 int main() {
     try{
@@ -143,7 +151,7 @@ int main() {
                 atenderPacientes(lista, listaServicio);
                 break;
             case 2:
-                verDepartamentos(listaServicio);
+                verDepartamentos(indice, totalServicios);
                 break;
             case 3:
                 cout << "Option3" << endl;
