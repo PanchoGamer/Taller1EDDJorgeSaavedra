@@ -6,7 +6,7 @@
 class Servicio{
     private:
         std::string nombre;
-        Queue<Persona>* pacientes;
+        Queue<Persona> pacientes;
     public:
         Servicio(std::string nombre);
 

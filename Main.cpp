@@ -9,7 +9,7 @@
 #include "Servicio.h"
 using namespace std;
 
-void cargarTxt(bool &archivoLeido,List<Persona>* lista){
+void cargarTxt(bool &archivoLeido,List<Persona>* lista,List<Servicio>* listaServicio){
     if (archivoLeido == false){
         archivoLeido = true;
 
@@ -18,6 +18,7 @@ void cargarTxt(bool &archivoLeido,List<Persona>* lista){
         if(!archivo.is_open()) {
             archivoLeido = false;
             cout << "El archivo no existe" << endl;
+            return;
         }
 
         string linea;
@@ -25,46 +26,80 @@ void cargarTxt(bool &archivoLeido,List<Persona>* lista){
         
         while (getline(archivo,linea)){
             stringstream ss(linea);
-            string idTexto, nombre, edadTexto, servicio;
+            string id, nombre, edadTexto, servicio;
 
-            getline(ss, idTexto, ';');
+            getline(ss, id, ';');
             getline(ss, nombre, ';');
             getline(ss, edadTexto, ';');
             getline(ss, servicio, ';');
 
-            int id = stoi(idTexto);
             int edad = stoi(edadTexto);
 
             Persona* p = new Persona(id,nombre,edad,servicio);
             lista->insert(*p,c);
             c++;
         }
-        
-        for(int i = 0; i < lista->getSize()-1; i++){
-            cout << "ID: " << lista->get(i).getId() << "\nNombre: " << lista->get(i).getNombre() << "\nEdad: " << lista->get(i).getEdad() << "\nServicio: " << lista->get(i).getServicio() << endl;
+
+        for(int i = 0; i < lista->getSize(); i++){
+            Persona p = lista->get(i);
+            
+            bool encontrado = false;
+            for(int j = 0; j < listaServicio->getSize(); j++){
+                if(p.getServicio() == listaServicio->get(j).getNombre()){
+                    encontrado = true;
+                    break;
+                }
+            };
+
+
+            if(!encontrado){
+                Servicio* servicio = new Servicio(p.getServicio());
+                listaServicio->insert(*servicio, listaServicio->getSize());
+            }
+
         };
+        
+        cout << listaServicio->getSize() << endl;
+        
+        //for(int i = 0; i < lista->getSize()-1; i++){
+            //cout << "ID: " << lista->get(i).getId() << "\nNombre: " << lista->get(i).getNombre() << "\nEdad: " << lista->get(i).getEdad() << "\nServicio: " << lista->get(i).getServicio() << endl;
+        //};
 
         archivo.close();
 
-        cout << "Archivo Leido" << endl;
+        ///cout << "Archivo Leido" << endl;
     }
     else{
         cout << "El archivo ya se ha leido" << "\n" << endl;
     };
 }
 
+void atenderPacientes(List<Persona>* lista){
+    int eleccion;
+    cout << "=== PACIENTES EN ESPERA ===" << endl;
+    for(int i = 0 ; i < lista->getSize() - 1; i++){
+        cout << i+1 << ". " << lista->get(i).getId() << " - " << lista->get(i).getNombre() << endl;
+    };
+    cout << "\nIndique cuantos pacientes va a atender: ";
+    cin >> eleccion;
+
+
+}
 int main() {
+    try{
     bool archivoLeido = false;
-    cout << "------------------- Menu Principal -------------------" << endl;
     int opcion;
     List<Persona>* lista = new List<Persona>();
+    List<Servicio>* listaServicio = new List<Servicio>();
+    cargarTxt(archivoLeido, lista, listaServicio);
     do{
-        cout << "1. Cargar Pacientes." << endl;
-        cout << "2. Mostrar cola de pacientes pendientes" << endl;
-        cout << "3. Atender a cierta cantidad" << endl;
-        cout << "4. Mostrar el estado general de los servicios" << endl;
-        cout << "5. Mostrar el historial de atenciones" << endl;
-        cout << "6. Salir" << endl;
+        opcion = 0;
+        cout << "=== HOSPITAL ===" << endl;
+        cout << "1. Atender paciente" << endl;
+        cout << "2. Ver departamento" << endl;
+        cout << "3. Revisar historial de atencion" << endl;
+        cout << "4. Salir" << endl;
+        cout << "" << endl;
         cout << "Eliga la opcion: ";
         cin >> opcion;
         cout << "" << endl;
@@ -73,13 +108,13 @@ int main() {
             throw invalid_argument("Error. Use solo numeros");
         }
 
-        if (opcion < 1 || opcion > 6){
+        if (opcion < 1 || opcion > 4){
             throw invalid_argument("Eliga una opcion valida");
         }
 
         switch(opcion){
             case 1:
-                cargarTxt(archivoLeido, lista);
+                atenderPacientes(lista);
                 break;
             case 2:
                 cout << "Opcion2" << endl;
@@ -87,16 +122,15 @@ int main() {
             case 3:
                 cout << "Option3" << endl;
                 break;
-            case 4:
-                cout << "Option4" << endl;
-                break;
-            case 5:
-                cout << "Option5" << endl;
-                break;
         };
         
 
-    } while (opcion != 6);
+    } while (opcion != 4);
 
     cout << "Hasta Luego :D" << endl;
+    } catch (int e) {
+        cout << "Error capturado (codigo " << e << ")" << endl;
+    } catch (exception& e){
+        cout << "Error: " << e.what() << endl;
+    }
 }

@@ -9,23 +9,22 @@ std::string Servicio::getNombre(){
 }
 
 void Servicio::agregarPaciente(Persona p){
-    pacientes->push(p);
+    pacientes.push(p);
 }
 
 Persona Servicio::atenderPaciente(){
-    Persona p = pacientes->front();
-    pacientes->pop();
+    Persona p = pacientes.front();
+    pacientes.pop();
     return p;
 }
 
 bool Servicio::pendientes(){
-    return !pacientes->empty();
+    return !pacientes.empty();
 }
 
 int Servicio::cantidadPacientes(){
-    return pacientes->size();
+    return pacientes.size();
 }
 
 Servicio::~Servicio(){
-    delete pacientes;
 }

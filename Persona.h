@@ -3,13 +3,13 @@
 
 class Persona{
     private:
-        int id;
+        std::string id;
         std::string nombre;
         int edad;
         std::string servicio;
     public:
-        Persona(int id, std::string nombre,int edad, std::string servicio);
-        int getId();
+        Persona(std::string id, std::string nombre,int edad, std::string servicio);
+        std::string getId();
         std::string getNombre();
         int getEdad();
         std::string getServicio();
